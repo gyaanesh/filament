@@ -18,6 +18,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -43,9 +44,9 @@ class CompanyResource extends Resource
                         "Kamaao" => "Kamaao",
                         "Other" => "Other"
                     ]),
-                    Toggle::make('status')->label('Is Active')->required(),
+                    Toggle::make('status')->label('Is Active')->required()->inline(false),
                     FileUpload::make('logo')->required()->columnSpanFull()->disk('public')
-                        ->directory('company')->image()
+                        ->directory('assets/company')->image()
                         ->imageEditor()->acceptedFileTypes(['image/jpeg']),
 
                 ])->columns(2)
@@ -57,13 +58,16 @@ class CompanyResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('logo')->size(40)->circular(),
-                TextColumn::make('legal_name'),
-                TextColumn::make('contact_main'),
-                TextColumn::make('company_type'),
-                ToggleColumn::make('status')->label('Active'),
+                TextColumn::make('legal_name')->searchable()->sortable(),
+                TextColumn::make('contact_main')->searchable(),
+                TextColumn::make('company_type')->badge()->sortable(),
+                ToggleColumn::make('status')->label('Active')->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+
+                Filter::make('status')
+                    ->query(fn (Builder $query): Builder => $query->where('status', true))
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

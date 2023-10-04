@@ -22,10 +22,10 @@ return new class extends Migration
             $table->string('type')->comment('not yet decieded');
             $table->bigInteger('category')->unsigned()->index();
             $table->foreign('category')->references('id')->on('project_categories')->onDelete('cascade');
-            $table->integer('amount'); 
             $table->bigInteger('subcategory')->unsigned()->index();
             $table->foreign('subcategory')->references('id')->on('project_sub_categories')->onDelete('cascade');
             $table->integer('coins');
+            $table->integer('amount'); 
             $table->boolean('is_trending')->default(false);
             $table->date('start_date');
             $table->date('end_date');

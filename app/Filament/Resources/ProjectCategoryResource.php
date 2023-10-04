@@ -2,12 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\JobCategoryResource\Pages;
-use App\Filament\Resources\JobCategoryResource\RelationManagers;
-use App\Models\JobCategory;
+use App\Filament\Resources\ProjectCategoryResource\Pages;
+use App\Filament\Resources\ProjectCategoryResource\RelationManagers;
+use App\Models\ProjectCategory;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -21,9 +20,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class JobCategoryResource extends Resource
+class ProjectCategoryResource extends Resource
 {
-    protected static ?string $model = JobCategory::class;
+    protected static ?string $model = ProjectCategory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -34,10 +33,9 @@ class JobCategoryResource extends Resource
                Section::make()->schema([
                 TextInput::make('category')->required(),
                 FileUpload::make('icon')->required()->disk('public')
-                ->directory('assets/jobcategory')->image()
+                ->directory('assets/projectcategory')->image()
                 ->imageEditor()->acceptedFileTypes(['image/jpeg']),
-                Toggle::make('status')->onColor('success')
-                ->offColor('gray'),
+                Toggle::make('status'),
                ])->columns(3)
             ])->columns(3);
     }
@@ -83,9 +81,9 @@ class JobCategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListJobCategories::route('/'),
-            'create' => Pages\CreateJobCategory::route('/create'),
-            'edit' => Pages\EditJobCategory::route('/{record}/edit'),
+            'index' => Pages\ListProjectCategories::route('/'),
+            'create' => Pages\CreateProjectCategory::route('/create'),
+            'edit' => Pages\EditProjectCategory::route('/{record}/edit'),
         ];
     }    
 }

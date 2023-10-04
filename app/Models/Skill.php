@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Skill extends Model
 {
     use HasFactory;
-    protected $fillable = ['skill'];
+    protected $fillable = ['skill', 'icon'];
 
 
     public function app_user_skills()
@@ -16,10 +16,10 @@ class Skill extends Model
         return $this->belongsToMany(app_user_skills::class, 'skill_id');
     }
 
-    public function getIconAttribute($value)
-    {
-        return asset($value);
-    }
+    // public function getIconAttribute($value)
+    // {
+    //     return asset($value);
+    // }
     public function app_user()
     {
         return $this->hasManyThrough(app_user_skills::class, app_user::class, 'user_id', 'id');

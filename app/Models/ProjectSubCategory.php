@@ -14,7 +14,7 @@ class ProjectSubCategory extends Model
     }
     public function category()
     {
-        return $this->belongsTo(project_categories::class, 'category');
+        return $this->belongsTo(ProjectCategory::class, 'category');
     }   
 
 }

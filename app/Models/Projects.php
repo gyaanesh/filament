@@ -71,6 +71,12 @@ class Projects extends Model
         });
     }
 
+    
+    public function posted_by()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     public function company()
     {
         return $this->belongsTo(Company::class)->select(['id', 'legal_name', 'popular_name', 'logo', 'about']);
@@ -80,21 +86,15 @@ class Projects extends Model
     {
         return $this->hasOne(webinar::class, 'id', 'webinar_id');
     }
-    public function getIsSavedAttribute()
-    {
-        if (auth()->check()) {
-            return auth()->user()->saved_projects->contains('project_id', $this->id);
-        }
-        return false;
-    }
+    
     public function category()
     {
-        return $this->hasOne(project_categories::class, 'id', 'category');
+        return $this->belongsTo(ProjectCategory::class, 'id', 'category');
     }
-    public function subcategory()
-    {
-        return $this->hasOne(ProjectSubCategory::class, 'id', 'subcategory');
-    }
+    // public function subcategory()
+    // {
+    //     return $this->hasOne(ProjectSubCategory::class, 'id', 'subcategory');
+    // }
 
     public function benefits()
     {

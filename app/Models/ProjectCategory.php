@@ -4,21 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class project_categories extends Model
+class ProjectCategory extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public function projects()
     {
         return $this->hasMany(Projects::class, 'category');
     }
-    public function sub_category()
+    public function Subcategory()
     {
         return $this->hasMany(ProjectSubCategory::class, 'subcategory');
     }
-    public function getIconAttribute($value)
-    {
-        return asset($value);
-    }
+    // public function getIconAttribute($value)
+    // {
+    //     return asset($value);
+    // }
 }

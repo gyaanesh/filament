@@ -2,12 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\JobCategoryResource\Pages;
-use App\Filament\Resources\JobCategoryResource\RelationManagers;
-use App\Models\JobCategory;
+use App\Filament\Resources\SkillResource\Pages;
+use App\Filament\Resources\SkillResource\RelationManagers;
+use App\Models\Skill;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -21,9 +20,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class JobCategoryResource extends Resource
+class SkillResource extends Resource
 {
-    protected static ?string $model = JobCategory::class;
+    protected static ?string $model = Skill::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -31,14 +30,24 @@ class JobCategoryResource extends Resource
     {
         return $form
             ->schema([
-               Section::make()->schema([
-                TextInput::make('category')->required(),
-                FileUpload::make('icon')->required()->disk('public')
-                ->directory('assets/jobcategory')->image()
-                ->imageEditor()->acceptedFileTypes(['image/jpeg']),
-                Toggle::make('status')->onColor('success')
-                ->offColor('gray'),
-               ])->columns(3)
+                Section::make()->schema([
+                    TextInput::make('skill')
+                        ->required()
+                        ->minValue(2)
+                        ->unique( ignoreRecord: true)
+                        ->live(onBlur: true)
+                        ->afterStateUpdated(function (Forms\Contracts\HasForms $livewire, Forms\Components\TextInput $component) {
+                            $livewire->validateOnly($component->getStatePath());
+                        }),
+
+                    Toggle::make('status')->onColor('success')
+                        ->offColor('gray')->inline(false),
+
+                    FileUpload::make('icon')->required()->disk('public')
+                        ->directory('assets/skills')->image()
+                        ->imageEditor()->acceptedFileTypes(['image/jpeg'])->columnSpanFull(),
+
+                ])->columns(2)
             ])->columns(3);
     }
 
@@ -46,22 +55,16 @@ class JobCategoryResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->sortable(),
-                TextColumn::make('category')->sortable()->searchable(),
-
                 ImageColumn::make('icon')->size(40)->circular(),
-
-                ToggleColumn::make('status')->sortable()
+                TextColumn::make('skill')->searchable()->sortable(),
+                ToggleColumn::make('status')->onColor('success')
+                    ->offColor('gray')->sortable(),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -72,20 +75,20 @@ class JobCategoryResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListJobCategories::route('/'),
-            'create' => Pages\CreateJobCategory::route('/create'),
-            'edit' => Pages\EditJobCategory::route('/{record}/edit'),
+            'index' => Pages\ListSkills::route('/'),
+            'create' => Pages\CreateSkill::route('/create'),
+            'edit' => Pages\EditSkill::route('/{record}/edit'),
         ];
-    }    
+    }
 }

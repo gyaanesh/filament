@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('icon');
             $table->tinyInteger('status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class wallet_transaction extends Model
+class WalletTransaction extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id', 'wallet_id', 'title', 'amount', 'trn_type', 'entity_id', 'entity', 'fund_account_id', 'fees', 'tax', 'status', 'utr', 'reference_id', 'failure_reason', 'status_details_id', 'status_details_reason', 'status_details_description', 'status_details_source', 'merchant_id', 'error_source', 'error_reason', 'error_description', 'error_code', 'error_step', 'error_metadata', 'trn_type'];

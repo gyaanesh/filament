@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class JobCategory extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = ['category', 'icon'];
     protected $hidden = ['status', 'deleted_at', 'created_at', 'updated_at'];
 
@@ -15,8 +16,5 @@ class JobCategory extends Model
     {
         return $this->hasMany(Job::class, 'category');
     }
-    public function getIconAttribute($value)
-    {
-        return asset($value);
-    }
+     
 }
