@@ -35,7 +35,8 @@ class UserResource extends Resource
                     TextInput::make('email')->email()->suffixIcon('heroicon-m-envelope')->unique(ignoreRecord: true)->live(onBlur:true),
                     TextInput::make('password')->password()->suffixIcon('heroicon-m-lock-closed'),
                     TextInput::make('enc_pass')->label("Confirm Password"),
-                    Select::make('role')->label('Role')->options(Role::all()->pluck('name')),
+                    Select::make('roles')->multiple()->relationship('roles', 'name')->preload(),
+                    
                     FileUpload::make('profile_image')->label('Profile Image')->required()->columnSpanFull()->disk('public')
                         ->directory('users')
                         ->imageEditor(),

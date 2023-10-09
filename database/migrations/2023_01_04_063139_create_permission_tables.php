@@ -28,7 +28,7 @@ class CreatePermissionTables extends Migration
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->bigIncrements('id'); // permission id
             $table->string('name');
-            $table->bigInteger('module_id')->unsigned()->index();
+            $table->bigInteger('module_id')->unsigned()->index()->nullable();
             $table->foreign('module_id')->references('id')->on('application_modules')->onDelete('cascade');      // For MySQL 8.0 use string('name', 125);
             $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
             $table->timestamps();

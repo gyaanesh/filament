@@ -12,11 +12,12 @@ use Illuminate\Notifications\Notifiable;
 use Filament\Panel;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-
+use Althinect\FilamentSpatieRolesPermissions\Concerns\HasSuperAdmin;
 class User extends Authenticatable implements FilamentUser
 {
 
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes ;
+    use HasSuperAdmin;
     // protected $guard_name = 'sanctum';
     /**
      * The attributes that are mass assignable.
