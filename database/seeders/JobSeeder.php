@@ -41,7 +41,7 @@ class JobSeeder extends Seeder
                 'type' => $faker->randomElement(['partTime', 'fulltime', 'contract']),
                 'category' => self::JOB_CATEGORIES[array_rand(self::JOB_CATEGORIES)],
                 'is_expired' => 0,
-                'last_date' => $faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
+                'last_date_to_apply' => $faker->dateTimeBetween('now', '+1 month')->format('Y-m-d'),
                 'total_openings' => $totalOpenings = $faker->numberBetween(1, 10),
                 'opening_left' => $faker->numberBetween(0, $totalOpenings),
                 'min_salary' => $min = $faker->numberBetween(20000, 50000),

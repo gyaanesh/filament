@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('webinars', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->string('banner')->comment("url for the banner uploaded to our system");
             $table->dateTime('schedule_date_time');
             $table->string('for')->comment('values - job, project, task');

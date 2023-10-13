@@ -46,11 +46,9 @@ class JobCategoryResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('icon')->size(40)->square(),
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('category')->sortable()->searchable(),
-
-                ImageColumn::make('icon')->size(40)->circular(),
-
                 ToggleColumn::make('status')->sortable()
             ])
             ->filters([

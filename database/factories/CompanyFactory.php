@@ -21,7 +21,7 @@ class CompanyFactory extends Factory
                 'legal_name' => $this->faker->company,
                 'popular_name' => $this->faker->companySuffix,
                 'url' => $this->faker->url,
-                'logo' => 'company/' . $this->faker->randomElement(['zomato.png', 'swiggy.png']), // Adjust the path as needed
+                'logo' => 'images/company/' . $this->faker->randomElement(['zomato.png', 'swiggy.png']), // Adjust the path as needed
                 'about' => $this->faker->paragraph,
                 'address' => $this->faker->address,
                 'contact_main' => $this->faker->phoneNumber,

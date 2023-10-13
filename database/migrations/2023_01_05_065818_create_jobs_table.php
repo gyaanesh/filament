@@ -19,9 +19,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('type')->comment('eg. partTime,fulltime, contract, work_from_home');
             $table->string('category');
-            $table->date('expire_on')->nullable()->default(DB::raw('DATE_ADD(created_at, INTERVAL 30 DAY)'));
+            $table->date('last_date_to_apply')->nullable();
             $table->integer('is_expired')->default(0)->comment("0 is NO, 1 YES");
-            
             $table->string('total_openings');
             $table->integer('opening_left')->nullable();
             $table->string('min_salary');
