@@ -104,8 +104,8 @@ class JobResource extends Resource
                 ToggleColumn::make('is_expired')
                     ->sortable()
                     ->toggleable(),
-                TextColumn::make('last_date')
-                    ->sortable()
+                TextColumn::make('last_date_to_apply')
+                    ->sortable()->date()
                     ->toggleable(),
                 TextColumn::make('total_openings')
                     ->sortable()

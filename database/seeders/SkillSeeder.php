@@ -16,12 +16,12 @@ class SkillSeeder extends Seeder
     public function run()
     {
         $skills = [
-            ['id' => 1, 'skill' => 'Bike Driving', 'icon' => 'assets/global_assets/images/app/skills/bikeDriving.png'],
-            ['id' => 2, 'skill' => 'Laptop', 'icon' => 'assets/global_assets/images/app/skills/Laptop.png'],
-            ['id' => 3, 'skill' => 'Car Driving', 'icon' => 'assets/global_assets/images/app/skills/carDriving.png'],
-            ['id' => 4, 'skill' => 'Sales & Marketing', 'icon' => 'assets/global_assets/images/app/skills/salemarketing.png'],
-            ['id' => 5, 'skill' => 'Smart Phone', 'icon' => 'assets/global_assets/images/app/skills/smartPhone.png'],
-            ['id' => 6, 'skill' => 'English Speaking', 'icon' => 'assets/global_assets/images/app/skills/englishSpeaking.png'],
+            ['id' => 1, 'skill' => 'Bike Driving', 'icon' => 'images/skills/bikeDriving.png'],
+            ['id' => 2, 'skill' => 'Laptop', 'icon' => 'images/skills/Laptop.png'],
+            ['id' => 3, 'skill' => 'Car Driving', 'icon' => 'images/skills/carDriving.png'],
+            ['id' => 4, 'skill' => 'Sales & Marketing', 'icon' => 'images/skills/salemarketing.png'],
+            ['id' => 5, 'skill' => 'Smart Phone', 'icon' => 'images/skills/smartPhone.png'],
+            ['id' => 6, 'skill' => 'English Speaking', 'icon' => 'images/skills/englishSpeaking.png'],
         ];
 
         DB::table('skills')->insert($skills);

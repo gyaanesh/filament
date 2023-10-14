@@ -55,7 +55,7 @@ class SkillResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('icon')->size(40)->circular(),
+                ImageColumn::make('icon')->size(40)->square(),
                 TextColumn::make('skill')->searchable()->sortable(),
                 ToggleColumn::make('status')->onColor('success')
                     ->offColor('gray')->sortable(),

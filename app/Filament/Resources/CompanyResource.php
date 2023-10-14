@@ -19,6 +19,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -57,18 +58,21 @@ class CompanyResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->sortable(),
                 ImageColumn::make('logo')->size(40)->circular(),
                 TextColumn::make('legal_name')->searchable()->sortable(),
                 TextColumn::make('contact_main')->searchable(),
                 TextColumn::make('company_type')->badge()->sortable(),
                 ToggleColumn::make('status')->label('Active')->sortable(),
             ])
+            ->defaultSort('id', 'desc')
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
-
-                Filter::make('status')
-                    ->query(fn (Builder $query): Builder => $query->where('status', true))
+                
+                Filter::make('status')->query(fn (Builder $query): Builder => $query->where('status', true)),
+                TrashedFilter::make(),
+                
             ])
+            
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
